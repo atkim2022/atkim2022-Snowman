@@ -10,7 +10,6 @@ public class GameController : MonoBehaviour
     {
     this.Message.text = "Can you save the snowman?";
     this.StartButton.gameObject.SetActive(false);
-    }
-
+    } 
 }
 
