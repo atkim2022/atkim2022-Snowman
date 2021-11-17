@@ -25,5 +25,11 @@ public class GameController : MonoBehaviour
     this.StartScreen.gameObject.SetActive(true);
     this.PlayScreen.gameObject.SetActive(false);
     }
+
+    public void Start()
+    {
+    this.StartScreen.gameObject.SetActive(true);
+    this.PlayScreen.gameObject.SetActive(false); 
+    }
 }
 
