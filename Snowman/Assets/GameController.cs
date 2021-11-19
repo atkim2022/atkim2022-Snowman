@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     public GameObject StartScreen;
     public GameObject PlayScreen; 
     private WordGame guessingGame; 
+    public UnityEngine.UI.InputField PlayerGuess;
     public void StartGame() 
     {
     this.guessingGame = new WordGame("apple", 5);
@@ -32,7 +33,14 @@ public class GameController : MonoBehaviour
     this.StartScreen.gameObject.SetActive(true);
     this.PlayScreen.gameObject.SetActive(false); 
     }
+    
+    public void SubmitGuess() 
+    {
+        Debug.Log(this.guessingGame.CheckGuess(PlayerGuess.text));
+        PlayerGuess.text = string.Empty;
+    }
 }
 
 
+          
 
