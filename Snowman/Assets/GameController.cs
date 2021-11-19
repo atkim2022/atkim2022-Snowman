@@ -8,9 +8,13 @@ public class GameController : MonoBehaviour
     public UnityEngine.UI.Button StartButton;
     public UnityEngine.UI.Button BackButton;
     public GameObject StartScreen;
-    public GameObject PlayScreen;  
+    public GameObject PlayScreen; 
+    private WordGuesser.WordGame guessingGame; 
     public void StartGame() 
     {
+    this.guessingGame = new WordGuesser.WordGame("apple", 5);
+    Debug.Log(this.guessingGame.GetWord());
+    Debug.Log(this.guessingGame.GetFullWord());
     this.Message.text = "Can you save the snowman?";
     this.StartButton.gameObject.SetActive(false);
     this.BackButton.gameObject.SetActive(true);
@@ -32,4 +36,6 @@ public class GameController : MonoBehaviour
     this.PlayScreen.gameObject.SetActive(false); 
     }
 }
+
+
 
