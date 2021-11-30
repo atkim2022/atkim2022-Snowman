@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
     public UnityEngine.UI.Text Guess;  
     public UnityEngine.UI.Text AfterGuess;  
     public GameObject LoseScreen;
+    public GameObject WinScreen;
 
 
     public void StartGame()
@@ -50,6 +51,14 @@ public class GameController : MonoBehaviour
         this.PlayScreen.gameObject.SetActive(false);
         this.LoseScreen.gameObject.SetActive(true);
     }
+
+     public void Win()
+    {
+        this.StartScreen.gameObject.SetActive(false);
+        this.PlayScreen.gameObject.SetActive(false);
+        this.LoseScreen.gameObject.SetActive(false);
+    }
+
 
     public void SubmitGuess()
     {
