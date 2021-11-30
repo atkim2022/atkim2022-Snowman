@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public UnityEngine.UI.Button StartButton;
     public UnityEngine.UI.Button BackButton;
     public UnityEngine.UI.Button TryAgainButton;
+    public UnityEngine.UI.Button PlayAgainButton;
     public GameObject StartScreen;
     public GameObject PlayScreen;
     private WordGame guessingGame;
@@ -24,12 +25,17 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
-        this.guessingGame = new WordGame("apple", 5);
+        this.guessingGame = new WordGame("Apple", 5);
         Debug.Log(this.guessingGame.GetWord());
         Debug.Log(this.guessingGame.GetFullWord());
         this.Message.text = "Can you save the snowman?";
         this.StartScreen.gameObject.SetActive(false);
         this.PlayScreen.gameObject.SetActive(true);
+        HiddenLetters.text = "Word to Guess:";
+        LettersGuessed.text = "Letters Guessed:";
+        AfterGuess.text = string.Empty;
+        GuessesRemaining.text = $"Guesses Remaining: {this.guessingGame.GetGuessLimit()}";
+        Guess.text = "Your Guess:";
     }
 
     public void OpenStartScreen()
@@ -37,6 +43,7 @@ public class GameController : MonoBehaviour
         this.StartScreen.gameObject.SetActive(true);
         this.PlayScreen.gameObject.SetActive(false);
         this.LoseScreen.gameObject.SetActive(false);
+        this.WinScreen.gameObject.SetActive(false);
     }
 
     public void Start()
@@ -44,15 +51,17 @@ public class GameController : MonoBehaviour
         this.StartScreen.gameObject.SetActive(true);
         this.PlayScreen.gameObject.SetActive(false);
         this.LoseScreen.gameObject.SetActive(false);
+        this.WinScreen.gameObject.SetActive(false);
     }
     public void Lose()
     {
         this.StartScreen.gameObject.SetActive(false);
         this.PlayScreen.gameObject.SetActive(false);
         this.LoseScreen.gameObject.SetActive(true);
+        this.WinScreen.gameObject.SetActive(false);
     }
 
-     public void Win()
+    public void Win()
     {
         this.StartScreen.gameObject.SetActive(false);
         this.PlayScreen.gameObject.SetActive(false);
@@ -63,13 +72,31 @@ public class GameController : MonoBehaviour
 
     public void SubmitGuess()
     {
-        Debug.Log(this.guessingGame.CheckGuess(PlayerGuess.text));
-        Guess.text = PlayerGuess.text;
-        HiddenLetters.text = this.guessingGame.GetWord();
-        LettersGuessed.text = this.guessingGame.GetGuessedLetters();
+        //Debug.Log(this.guessingGame.CheckGuess(PlayerGuess.text));
+        Guess.text = $"Your Guess: {PlayerGuess.text}";
+        HiddenLetters.text = $"Word to Guess: {this.guessingGame.GetWord()}";
+        LettersGuessed.text = $"Letters Guessed: {this.guessingGame.GetGuessedLetters()}";
         AfterGuess.text = this.guessingGame.CheckGuess(PlayerGuess.text);
-        GuessesRemaining.text = $"{this.guessingGame.GetGuessLimit() - this.guessingGame.GetIncorrectGuesses()}";
+        GuessesRemaining.text = $"Guesses Remaining: {this.guessingGame.GetGuessLimit() - this.guessingGame.GetIncorrectGuesses()}";
         PlayerGuess.text = string.Empty;
+
+        if (this.guessingGame.IsGameOver())
+        {
+        this.StartScreen.gameObject.SetActive(false);
+        this.PlayScreen.gameObject.SetActive(false);
+        this.LoseScreen.gameObject.SetActive(true);
+        this.WinScreen.gameObject.SetActive(false);
+        }
+
+        else if (this.guessingGame.IsGameWon())
+        {
+        this.StartScreen.gameObject.SetActive(false);
+        this.PlayScreen.gameObject.SetActive(false);
+        this.LoseScreen.gameObject.SetActive(false);
+        this.WinScreen.gameObject.SetActive(true);
+        }
+
+
     }
 }
 
