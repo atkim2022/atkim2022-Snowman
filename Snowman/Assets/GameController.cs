@@ -57,6 +57,7 @@ public class GameController : MonoBehaviour
         this.StartScreen.gameObject.SetActive(false);
         this.PlayScreen.gameObject.SetActive(false);
         this.LoseScreen.gameObject.SetActive(false);
+        this.WinScreen.gameObject.SetActive(true);
     }
 
 
