@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public UnityEngine.UI.Text Message;
     public UnityEngine.UI.Button StartButton;
     public UnityEngine.UI.Button BackButton;
+    public UnityEngine.UI.Button TryAgainButton;
     public GameObject StartScreen;
     public GameObject PlayScreen;
     private WordGame guessingGame;
@@ -17,6 +18,7 @@ public class GameController : MonoBehaviour
     public UnityEngine.UI.Text GuessesRemaining;
     public UnityEngine.UI.Text Guess;  
     public UnityEngine.UI.Text AfterGuess;  
+    public GameObject LoseScreen;
 
 
     public void StartGame()
@@ -33,12 +35,20 @@ public class GameController : MonoBehaviour
     {
         this.StartScreen.gameObject.SetActive(true);
         this.PlayScreen.gameObject.SetActive(false);
+        this.LoseScreen.gameObject.SetActive(false);
     }
 
     public void Start()
     {
         this.StartScreen.gameObject.SetActive(true);
         this.PlayScreen.gameObject.SetActive(false);
+        this.LoseScreen.gameObject.SetActive(false);
+    }
+    public void Lose()
+    {
+        this.StartScreen.gameObject.SetActive(false);
+        this.PlayScreen.gameObject.SetActive(false);
+        this.LoseScreen.gameObject.SetActive(true);
     }
 
     public void SubmitGuess()
@@ -52,6 +62,7 @@ public class GameController : MonoBehaviour
         PlayerGuess.text = string.Empty;
     }
 }
+
 
 
 
