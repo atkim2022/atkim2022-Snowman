@@ -19,13 +19,16 @@ public class GameController : MonoBehaviour
     public UnityEngine.UI.Text GuessesRemaining;
     public UnityEngine.UI.Text Guess;  
     public UnityEngine.UI.Text AfterGuess;  
+    public UnityEngine.UI.Text CorrectWord;  
     public GameObject LoseScreen;
     public GameObject WinScreen;
 
 
     public void StartGame()
     {
-        this.guessingGame = new WordGame("Apple", 5);
+        WordGuesser.WordSelector mySelector = WordGuesser.WordSelector.LoadFromString("apple banana grape austin pencil book");
+        string randomWord = mySelector.GetWord();
+        this.guessingGame = new WordGame(randomWord, 5);
         Debug.Log(this.guessingGame.GetWord());
         Debug.Log(this.guessingGame.GetFullWord());
         this.Message.text = "Can you save the snowman?";
@@ -55,6 +58,7 @@ public class GameController : MonoBehaviour
     }
     public void Lose()
     {
+        CorrectWord.text = $"The correct word was {this.guessingGame.GetFullWord()}";
         this.StartScreen.gameObject.SetActive(false);
         this.PlayScreen.gameObject.SetActive(false);
         this.LoseScreen.gameObject.SetActive(true);
